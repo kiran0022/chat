@@ -35,8 +35,8 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
           <h1 className="text-2xl font-bold">
             Type <span className=" text-white/70">::</span> chat
           </h1>
-          <ChatPressence />
         </div>
+        <ChatPressence />
         <div>
           {!user ? (
             <Button onClick={handleLogin}>Login</Button>

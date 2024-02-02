@@ -1,3 +1,4 @@
+"use client";
 import { useUser } from "@/lib/store/user";
 import SupabaseBrowserClient from "@/lib/supabase/browser";
 import React, { useEffect, useState } from "react";
