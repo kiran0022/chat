@@ -9,7 +9,7 @@ export default function ChatAbout() {
           Chat application with supabase realtime db. <br />
           Login to send message
         </p>
-      </div>{" "}
+      </div>
     </div>
   );
 }
