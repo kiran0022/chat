@@ -31,19 +31,18 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
   return (
     <div className="h-20">
       <div className="flex justify-between items-center border-b p-5 h-full">
-        <div className="flex flex-col gap-1">
+        <div>
           <h1 className="text-2xl font-bold">
             Type <span className=" text-white/70">::</span> chat
           </h1>
+          <ChatPressence />
         </div>
-        <ChatPressence />
-        <div>
-          {!user ? (
-            <Button onClick={handleLogin}>Login</Button>
-          ) : (
-            <Button onClick={handleLogout}>Logout</Button>
-          )}
-        </div>
+
+        {!user ? (
+          <Button onClick={handleLogin}>Login</Button>
+        ) : (
+          <Button onClick={handleLogout}>Logout</Button>
+        )}
       </div>
     </div>
   );
