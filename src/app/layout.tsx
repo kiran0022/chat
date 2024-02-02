@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const space_Grotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -25,8 +26,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster position="top-center" />
         </ThemeProvider>
       </body>
     </html>
   );
 }
+
+// const dev = process.env.NODE_ENV !== 'production';
+
+// export const server = dev ? 'http://localhost:3000/api' : 'https://'
