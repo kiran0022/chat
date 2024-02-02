@@ -9,6 +9,22 @@ import SupabaseServerClient from "@/lib/supabase/server";
 export default async function Home() {
   const supabase = await SupabaseServerClient();
   const { data } = await supabase.auth.getSession();
+  console.log(data);
+
+  //wb change
+  // t
+  if (data.session) {
+    await fetch(process.env.DISCORD_WEBHOOK!, {
+      method: "POST",
+      body: JSON.stringify({
+        content: `${data.session?.user.email} just logged in`,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+  //wb change
 
   return (
     <>
