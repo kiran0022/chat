@@ -27,7 +27,7 @@ export default function ListMessages() {
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "messages" },
         async (payload) => {
-          if (optimisticIds.includes(payload.new.id)) {
+          if (!optimisticIds.includes(payload.new.id)) {
             console.log("Change received!", payload);
             const { error, data } = await supabase
               .from("users")
