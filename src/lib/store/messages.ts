@@ -36,7 +36,10 @@ export const useMessage = create<MessageState>()((set) => ({
     optimisticIds: [], // msg created twice same time so capturing ids of msgs and avoid rendering it in the ListMessage comp and while ChatInput comp
     actionMessage: undefined,
     setMessages: (messages) => set((state) => ({ messages: [...messages, ...state.messages,], page: state.page + 1, hasMore: messages.length >= LIMIT_MESSAGE })),
-    addMessage: (new_message) => set((state) => ({ messages: [...state.messages, new_message], optimisticIds: [...state.optimisticIds, new_message.id] })),
+    addMessage: (new_message) => set((state) => ({
+        messages: [...state.messages, new_message],
+        // optimisticIds: [...state.optimisticIds, new_message.id]
+    })),
     setActionMessage: (message) => set(() => ({
         actionMessage: message
     })),
