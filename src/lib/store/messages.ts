@@ -26,6 +26,7 @@ interface MessageState {
     setActionMessage: (message: Imessage | undefined) => void,
     optimisticDeleteMessage: (messageId: string) => void,
     optimisticUpdateMessage: (messageId: Imessage) => void,
+    setOptimisticIds: (id: string) => void,
     setMessages: (messages: Imessage[]) => void
 }
 
@@ -35,7 +36,11 @@ export const useMessage = create<MessageState>()((set) => ({
     messages: [],
     optimisticIds: [], // msg created twice same time so capturing ids of msgs and avoid rendering it in the ListMessage comp and while ChatInput comp
     actionMessage: undefined,
-    setMessages: (messages) => set((state) => ({ messages: [...messages, ...state.messages,], page: state.page + 1, hasMore: messages.length >= LIMIT_MESSAGE })),
+    setMessages: (messages) => set((state) => ({
+        messages: [...messages, ...state.messages,], page: state.page + 1,
+        hasMore: messages.length >= LIMIT_MESSAGE
+    })),
+    setOptimisticIds: (id: string) => set((state) => ({ optimisticIds: [...state.optimisticIds, id] })),
     addMessage: (new_message) => set((state) => ({
         messages: [...state.messages, new_message],
         // optimisticIds: [...state.optimisticIds, new_message.id]
