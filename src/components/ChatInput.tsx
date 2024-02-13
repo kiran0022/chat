@@ -9,6 +9,7 @@ import { Imessage, useMessage } from "@/lib/store/messages";
 
 export default function ChatInput() {
   const user = useUser((state) => state.user);
+  const setOptimisticIds = useMessage((state) => state.setOptimisticIds);
   const addMessage = useMessage((state) => state.addMessage);
   const supabase = SupabaseBrowserClient();
   const handleSendMessage = async (text: string) => {
@@ -28,7 +29,7 @@ export default function ChatInput() {
       };
 
       addMessage(newMessage as Imessage);
-
+      setOptimisticIds(newMessage.id);
       const { error } = await supabase.from("messages").insert({ text });
       if (error) {
         toast.message(error.message);

@@ -5,6 +5,8 @@ import ChatMessages from "@/components/ChatMessages";
 import ListMessages from "@/components/ListMessages";
 import InitUser from "@/lib/store/InitUser";
 import SupabaseServerClient from "@/lib/supabase/server";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export default async function Home() {
   const supabase = await SupabaseServerClient();
@@ -31,11 +33,12 @@ export default async function Home() {
       <main className=" max-w-3xl mx-auto md:py-10 h-screen">
         <div className=" h-full border rounded-md flex flex-col relative">
           <ChatHeader user={data.session?.user} />
+
           {data.session?.user ? (
-            <>
+            <Suspense fallback={<Loading />}>
               <ChatMessages />
               <ChatInput />
-            </>
+            </Suspense>
           ) : (
             <ChatAbout />
           )}
