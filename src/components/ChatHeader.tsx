@@ -9,11 +9,24 @@ import ChatPressence from "./ChatPressence";
 export default function ChatHeader({ user }: { user: User | undefined }) {
   const router = useRouter();
 
-  const handleLogin = async () => {
+  const handleGithubLogin = async () => {
     const supabase = SupabaseBrowserClient();
 
     await supabase.auth.signInWithOAuth({
-      provider: "github",
+      provider: "google",
+      options: {
+        redirectTo: location.origin + "/auth/callback",
+        //below is example for next config url for custom ui page after login
+        // redirectTo: location.origin + "/auth/callback?next=/thankyou",
+      },
+    });
+  };
+
+  const handleGoogleLogin = async () => {
+    const supabase = SupabaseBrowserClient();
+
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
       options: {
         redirectTo: location.origin + "/auth/callback",
         //below is example for next config url for custom ui page after login
@@ -39,7 +52,10 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
         </div>
 
         {!user ? (
-          <Button onClick={handleLogin}>Login</Button>
+          <div className="flex gap-4">
+            <Button onClick={handleGithubLogin}>Login Github</Button>
+            <Button onClick={handleGoogleLogin}>Login Google</Button>
+          </div>
         ) : (
           <Button onClick={handleLogout}>Logout</Button>
         )}
