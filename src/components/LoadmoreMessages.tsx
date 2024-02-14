@@ -3,7 +3,6 @@ import { Button } from "./ui/button";
 import { LIMIT_MESSAGE } from "@/lib/constant";
 import { getFromAndTo } from "@/lib/utils";
 import { useMessage } from "@/lib/store/messages";
-import { error } from "console";
 import { toast } from "sonner";
 
 export default function LoadmoreMessages() {

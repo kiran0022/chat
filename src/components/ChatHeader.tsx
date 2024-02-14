@@ -5,6 +5,7 @@ import SupabaseBrowserClient from "@/lib/supabase/browser";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import ChatPressence from "./ChatPressence";
+import { AtSignIcon, GithubIcon } from "lucide-react";
 
 export default function ChatHeader({ user }: { user: User | undefined }) {
   const router = useRouter();
@@ -53,8 +54,14 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
 
         {!user ? (
           <div className="flex gap-4">
-            <Button onClick={handleGithubLogin}>Login Github</Button>
-            <Button onClick={handleGoogleLogin}>Login Google</Button>
+            <Button onClick={handleGithubLogin}>
+              {" "}
+              <GithubIcon /> Login Github
+            </Button>
+            <Button onClick={handleGoogleLogin}>
+              {" "}
+              <AtSignIcon /> Login Google
+            </Button>
           </div>
         ) : (
           <Button onClick={handleLogout}>Logout</Button>
