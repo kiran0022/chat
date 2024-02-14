@@ -55,12 +55,10 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
         {!user ? (
           <div className="flex gap-4">
             <Button onClick={handleGithubLogin}>
-              {" "}
-              <GithubIcon /> Login Github
+              <GithubIcon className="mr-2" /> Login Github
             </Button>
             <Button onClick={handleGoogleLogin}>
-              {" "}
-              <AtSignIcon /> Login Google
+              <AtSignIcon className="mr-2" /> Login Google
             </Button>
           </div>
         ) : (
