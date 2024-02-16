@@ -5,7 +5,15 @@ import SupabaseBrowserClient from "@/lib/supabase/browser";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import ChatPressence from "./ChatPressence";
-import { AtSignIcon, GithubIcon } from "lucide-react";
+import { AtSignIcon, GithubIcon, MoreHorizontal } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function ChatHeader({ user }: { user: User | undefined }) {
   const router = useRouter();
@@ -54,12 +62,31 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
 
         {!user ? (
           <div className="flex gap-4">
-            <Button onClick={handleGithubLogin}>
-              <GithubIcon className="mr-2" /> Login Github
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger className=" outline-none">
+                <Button>Login</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mt-1">
+                {/* <DropdownMenuLabel>Action</DropdownMenuLabel> */}
+                <DropdownMenuItem
+                  className="border text-sm"
+                  onClick={handleGoogleLogin}
+                >
+                  <AtSignIcon className="p-1 mr-1" /> Login Google
+                </DropdownMenuItem>{" "}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className="border text-sm"
+                  onClick={handleGithubLogin}
+                >
+                  <GithubIcon className="p-1 mr-1" /> Login Github
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            {/* <Button onClick={handleGithubLogin}></Button>
             <Button onClick={handleGoogleLogin}>
               <AtSignIcon className="mr-2" /> Login Google
-            </Button>
+            </Button> */}
           </div>
         ) : (
           <Button onClick={handleLogout}>Logout</Button>
