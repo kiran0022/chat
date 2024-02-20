@@ -22,7 +22,7 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
     const supabase = SupabaseBrowserClient();
 
     await supabase.auth.signInWithOAuth({
-      provider: "google",
+      provider: "github",
       options: {
         redirectTo: location.origin + "/auth/callback",
         //below is example for next config url for custom ui page after login
