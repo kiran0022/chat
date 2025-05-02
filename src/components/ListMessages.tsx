@@ -33,14 +33,15 @@ export default function ListMessages() {
               .from("users")
               .select("*")
               .eq("id", payload.new.send_by)
-              .single();
+              .limit(1);
+            console.log("opt data", data)
 
             if (error) {
               toast.error(error.message);
             } else {
               const newMessage = {
                 ...payload.new,
-                users: data,
+                users: data[0],
               };
               console.log("newMessage", newMessage);
               addMessage(newMessage as Imessage);
