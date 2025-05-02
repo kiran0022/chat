@@ -33,14 +33,14 @@ export default function ListMessages() {
               .from("users")
               .select("*")
               .eq("id", payload.new.send_by)
-              .single();
+              .limit(1);
             console.log("opt data", data)
             console.log("error", error)
             const { error:error1, data:data1 } = await supabase
               .from("users")
               .select("*")
               .eq("id", payload.new.send_by)
-              .limit(1);
+              .single();
           console.log("opt data", data1)
           console.log("error1", error1)
             const { error:error2, data:data2 } = await supabase
