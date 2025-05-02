@@ -14,8 +14,7 @@ import { useUser } from "@/lib/store/user";
 
 export default function Message({ message }: { message: Imessage }) {
   const user = useUser((state) => state.user);
-  console.log("user",user)
-  console.log("message",message)
+
   return (
     <div className="flex gap-2">
       <div>

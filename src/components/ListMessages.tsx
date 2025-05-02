@@ -28,43 +28,19 @@ export default function ListMessages() {
         { event: "INSERT", schema: "public", table: "messages" },
         async (payload) => {
           if (!optimisticIds.includes(payload.new.id)) {
-            console.log("Change received!", payload);
             const { error, data } = await supabase
               .from("users")
               .select("*")
               .eq("id", payload.new.send_by)
-              .limit(1);
-            console.log("opt data", data)
-            console.log("error", error)
-            const { error:error1, data:data1 } = await supabase
-              .from("users")
-              .select("*")
-              .eq("id", payload.new.send_by)
               .single();
-          console.log("opt data", data1)
-          console.log("error1", error1)
-            const { error:error2, data:data2 } = await supabase
-              .from("users")
-              .select("*")
-              .eq("id", payload.new.send_by)
-              .limit(1).maybeSingle();;
-          console.log("opt data", data2)
-          console.log("error2", error2)
-            const { error:error3, data:data3 } = await supabase
-              .from("users")
-              .select("*")
-              .eq("id", payload.new.send_by)
-              .maybeSingle();
-          console.log("opt data", data3)
-          console.log("error3", error3)
+         
             if (error) {
               toast.error(error.message);
             } else {
               const newMessage = {
                 ...payload.new,
-                users: data[0],
+                users: data,
               };
-              console.log("newMessage", newMessage);
               addMessage(newMessage as Imessage);
             }
           }
@@ -81,7 +57,6 @@ export default function ListMessages() {
         "postgres_changes",
         { event: "DELETE", schema: "public", table: "messages" },
         (payload) => {
-          console.log(payload);
           optimisticDeleteMessage(payload.old.id);
         }
       )

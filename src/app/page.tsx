@@ -11,7 +11,6 @@ import Loading from "./loading";
 export default async function Home() {
   const supabase = await SupabaseServerClient();
   const { data } = await supabase.auth.getSession();
-  // console.log(data);
 
   //wb change
   // t
