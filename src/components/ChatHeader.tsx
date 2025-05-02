@@ -74,7 +74,7 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
                   onClick={()=>{ alert("Google service temporarily !available \n use Github :)"}}
                 >
                   <AtSignIcon className="p-1 mr-1 line-through" /> Login Google
-                </DropdownMenuItem>{" "}
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   className="border text-sm"
